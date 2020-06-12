@@ -1,5 +1,5 @@
-User.create!(name:  "美里",
-                     email: "mii0823@gmail.com",
-                     password:  "mii0823",
-                     password_confirmation: "mii0823",
+User.create!(name:  "愁",
+                     email: "resort1315@gmail.com",
+                     password:  "kyou0216",
+                     password_confirmation: "kyou0216",
                      admin: true)

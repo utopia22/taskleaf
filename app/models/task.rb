@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   validates :description, presence: true, uniqueness: true
 
   belongs_to :user
+  scope :recent, -> { order(created_at: :desc)}
 
   private
 
