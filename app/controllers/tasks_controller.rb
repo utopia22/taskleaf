@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).recent
   end
 
   def show
@@ -36,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def update
-      
+
       @task.update!(task_params)
       redirect_to tasks_url, notice: "タスク「#{@task.name}」を更新しました。"
   end
