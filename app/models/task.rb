@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true, uniqueness: true
+  has_one_attached :image
 
   belongs_to :user
   scope :recent, -> { order(created_at: :desc)}
