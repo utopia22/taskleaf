@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true)
+    @tasks = @q.result(destinct: true).page(params[:page])
 
     respond_to do |format|
       format.html
@@ -54,6 +55,11 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
   end
 
+  def import
+     current_user.tasks.import(params[:file])
+     redirect_to tasks_url, notice: "タスクを追加しました"
+  end
+
   private
 
   def task_params
@@ -63,5 +69,6 @@ class TasksController < ApplicationController
   def set_task
     @task = current_user.tasks.find(params[:id])
   end
+
 
 end
